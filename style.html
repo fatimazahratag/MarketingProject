@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyStyle - La mode qui te ressemble</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%); 
+            color: #333; 
+            line-height: 1.6; 
+        }
+        header { 
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); 
+            color: white; 
+            text-align: center; 
+            padding: 60px 20px; 
+            position: relative; 
+            overflow: hidden; 
+        }
+        header::before { 
+            content: ''; 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            right: 0; 
+            bottom: 0; 
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grain" width="100" height="100" patternUnits="userSpaceOnUse"><circle cx="25" cy="25" r="1" fill="white" opacity="0.1"/><circle cx="75" cy="75" r="1" fill="white" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grain)"/></svg>'); 
+        }
+        header h1 { font-size: 2.5em; font-weight: 700; margin-bottom: 10px; position: relative; z-index: 1; }
+        header p { font-size: 1.2em; font-weight: 300; position: relative; z-index: 1; }
+        .container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 40px 20px; 
+            display: grid; 
+            gap: 40px; 
+        }
+        .section { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1); 
+            transition: transform 0.3s ease, box-shadow 0.3s ease; 
+        }
+        .section:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(0,0,0,0.15); }
+        .section h2 { 
+            color: #6366f1; 
+            font-size: 1.8em; 
+            margin-bottom: 20px; 
+            text-align: center; 
+        }
+        .selector { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); 
+            gap: 15px; 
+            margin: 20px 0; 
+        }
+        .option { 
+            padding: 15px; 
+            border: 2px solid #e5e7eb; 
+            border-radius: 15px; 
+            cursor: pointer; 
+            text-align: center; 
+            font-weight: 600; 
+            transition: all 0.3s ease; 
+            background: white; 
+        }
+        .option:hover { 
+            border-color: #6366f1; 
+            transform: scale(1.05); 
+            box-shadow: 0 5px 15px rgba(99, 102, 241, 0.2); 
+        }
+        .option.selected { 
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%); 
+            color: white; 
+            border-color: transparent; 
+        }
+        #aperçu { 
+            text-align: center; 
+            margin: 30px 0; 
+            animation: fadeIn 0.5s ease; 
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        #produit { 
+            width: 100%; 
+            max-width: 350px; 
+            height: auto; 
+            border-radius: 15px; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1); 
+            transition: transform 0.3s ease; 
+        }
+        #produit:hover { transform: scale(1.02); }
+        #texte-custom, #motif-upload { 
+            width: 100%; 
+            padding: 15px; 
+            margin: 10px 0; 
+            border: 2px solid #e5e7eb; 
+            border-radius: 10px; 
+            font-size: 1em; 
+            transition: border-color 0.3s ease; 
+        }
+        #texte-custom:focus, #motif-upload:focus { 
+            outline: none; 
+            border-color: #6366f1; 
+            box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1); 
+        }
+        .form-pre { 
+            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%); 
+            padding: 30px; 
+            border-radius: 20px; 
+        }
+        .form-pre label { 
+            display: block; 
+            margin: 10px 0 5px; 
+            font-weight: 600; 
+            color: #374151; 
+        }
+        .form-pre input[type="text"], .form-pre input[type="email"] { 
+            width: 100%; 
+            padding: 12px; 
+            border: 2px solid #e5e7eb; 
+            border-radius: 10px; 
+            margin-bottom: 15px; 
+            transition: border-color 0.3s ease; 
+        }
+        .form-pre input[type="text"]:focus, .form-pre input[type="email"]:focus { 
+            border-color: #10b981; 
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1); 
+        }
+        input[type="submit"] { 
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%); 
+            color: white; 
+            padding: 15px 30px; 
+            border: none; 
+            border-radius: 10px; 
+            cursor: pointer; 
+            font-size: 1.1em; 
+            font-weight: 600; 
+            width: 100%; 
+            transition: transform 0.3s ease; 
+        }
+        input[type="submit"]:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(16, 185, 129, 0.3); }
+        #desc-apercu, #design-choisi { 
+            font-weight: 600; 
+            color: #6366f1; 
+            margin-top: 10px; 
+        }
+        footer { 
+            text-align: center; 
+            padding: 20px; 
+            background: #1f2937; 
+            color: white; 
+            margin-top: 40px; 
+            font-size: 0.9em; 
+        }
+        @media (max-width: 768px) { 
+            header h1 { font-size: 2em; } 
+            .container { padding: 20px 10px; gap: 20px; } 
+            .section { padding: 20px; } 
+            .selector { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; } 
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🧢 MyStyle – La mode qui te ressemble</h1>
+        <p>Exprime ta personnalité : Choisis, personnalise, et reçois imprimé à la demande !</p>
+    </header>
+
+    <div class="container">
+        <div class="section">
+            <h2>Comment ça marche ?</h2>
+            <p style="text-align: center; font-size: 1.1em;">1. Choisis ton modèle et couleur. 2. Ajoute ton texte ou motif. 3. Vois l'aperçu en live. 4. Pré-commande et on imprime via partenaires locaux à Oujda (livraison 3-5 jours, 150-300 DH).</p>
+        </div>
+
+        <div class="section">
+            <h2>Éditeur Simple</h2>
+            <div class="selector">
+                <div class="option" onclick="selectModel('tshirt')">👕 T-Shirt<br><small>150 DH</small></div>
+                <div class="option" onclick="selectModel('sweat')">🧥 Sweat<br><small>250 DH</small></div>
+                <div class="option" onclick="selectModel('casquette')">🧢 Casquette<br><small>100 DH</small></div>
+                <div class="option" onclick="selectModel('tote')">👜 Tote Bag<br><small>80 DH</small></div>
+            </div>
+
+            <div class="selector">
+                <h3 style="grid-column: 1 / -1; text-align: center; color: #6366f1;">Couleur :</h3>
+                <div class="option" style="background: white; color: black;" onclick="selectColor('white')">Blanc</div>
+                <div class="option" style="background: black; color: white;" onclick="selectColor('black')">Noir</div>
+                <div class="option" style="background: blue; color: white;" onclick="selectColor('blue')">Bleu</div>
+                <div class="option" style="background: red; color: white;" onclick="selectColor('red')">Rouge</div>
+            </div>
+
+            <div style="display: grid; gap: 15px;">
+                <h3>Ajoute ton Texte :</h3>
+                <input type="text" id="texte-custom" placeholder="Ex. : Exprime-toi !" oninput="updateApercu()">
+                <h3>Ajoute un Motif (Optionnel) :</h3>
+                <input type="file" id="motif-upload" accept="image/*" onchange="updateApercu()">
+            </div>
+
+            <div id="aperçu">
+                <h3>Aperçu de ton Produit</h3>
+                <img id="produit" src="https://via.placeholder.com/350x450/ffffff/000000?text=T-Shirt+Blanc" alt="Aperçu Produit">
+                <p id="desc-apercu">Sélectionne un modèle pour commencer !</p>
+            </div>
+        </div>
+
+        <div class="section form-pre">
+            <h2>Pré-Commander</h2>
+            <form>
+                <label>Nom :</label>
+                <input type="text" required>
+                <label>E-mail :</label>
+                <input type="email" required>
+                <label>Taille (ex. : S/M/L) :</label>
+                <input type="text" required>
+                <p>Design choisi : <span id="design-choisi">Aucun</span></p>
+                <input type="submit" value="Envoyer Pré-Commande ! (Simulation)">
+            </form>
+            <p style="text-align: center; margin-top: 20px; font-size: 0.9em; color: #6b7280;"><small>Imprimé à la demande par imprimeurs locaux à Oujda. Livraison via Poste Maroc/Aramex (30 DH). Merci pour ton intérêt !</small></p>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 MyStyle – Projet Étudiants EHEI Oujda. Groupe : Fatima Zahra Tagmouti, Fatima Ezzahra Hassnaoui, Fatima Zohra Hakkou, Meriam Mohamed Meinatt.</p>
+    </footer>
+
+    <script>
+    let modelActuel = 'tshirt';
+    let colorActuelle = 'white';
+    let texteCustom = '';
+
+    function selectModel(model, element) {
+        modelActuel = model;
+
+        // enlever la sélection juste des modèles
+        document.querySelectorAll('.selector:first-of-type .option').forEach(opt => opt.classList.remove('selected'));
+        element.classList.add('selected');
+
+        updateApercu();
+    }
+
+    function selectColor(color, element) {
+        colorActuelle = color;
+
+        // enlever la sélection juste des couleurs
+        document.querySelectorAll('.selector:nth-of-type(2) .option').forEach(opt => opt.classList.remove('selected'));
+        element.classList.add('selected');
+
+        updateApercu();
+    }
+
+    function updateApercu() {
+    texteCustom = document.getElementById('texte-custom').value;
+    const img = document.getElementById('produit');
+    const desc = document.getElementById('desc-apercu');
+    const motifInput = document.getElementById('motif-upload');
+
+    // Si l’utilisateur a uploadé une image, on l’affiche
+    if (motifInput.files && motifInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            img.src = e.target.result; // L’image uploadée
+        }
+        reader.readAsDataURL(motifInput.files[0]);
+    } else {
+        // Sinon, on affiche le placeholder avec couleur et texte
+        const models = {
+            tshirt: 'https://via.placeholder.com/350x450',
+            sweat: 'https://via.placeholder.com/350x550',
+            casquette: 'https://via.placeholder.com/350x250',
+            tote: 'https://via.placeholder.com/350x350'
+        };
+        const colorMap = { 
+            white: 'ffffff/000000', 
+            black: '000000/ffffff', 
+            blue: '0000ff/ffffff', 
+            red: 'ff0000/ffffff' 
+        };
+        const baseUrl = models[modelActuel];
+        const colorParams = colorMap[colorActuelle];
+        const text = texteCustom ? encodeURIComponent(texteCustom) : 'Ton+Design';
+        img.src = `${baseUrl}/${colorParams}?text=${text}`;
+    }
+
+    desc.textContent = `${modelActuel.charAt(0).toUpperCase() + modelActuel.slice(1)} en ${colorActuelle} avec "${texteCustom || 'Ton texte ici'}"`;
+    document.getElementById('design-choisi').textContent = `${modelActuel} - ${colorActuelle} - ${texteCustom || 'Sans texte'}`;
+}
+
+
+    // Fix pour que les boutons passent l'élément courant
+    document.querySelectorAll('.selector:first-of-type .option').forEach(opt => {
+        opt.addEventListener('click', () => selectModel(opt.textContent.toLowerCase().split(' ')[0], opt));
+    });
+    document.querySelectorAll('.selector:nth-of-type(2) .option').forEach(opt => {
+        opt.addEventListener('click', () => selectColor(opt.textContent.toLowerCase(), opt));
+    });
+
+    // Simulation envoi formulaire
+    document.querySelector('form').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('Pré-commande envoyée ! On te contacte bientôt pour le lancement MyStyle. Merci ! 🎉');
+    });
+</script>
+
+</body>
+</html>
